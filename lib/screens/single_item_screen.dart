@@ -1,9 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SingleItemScreen extends StatelessWidget {
+class SingleItemScreen extends StatefulWidget {
   String img;
   SingleItemScreen(this.img);
+
+  @override
+  _SingleItemScreenState createState() => _SingleItemScreenState();
+}
+
+class _SingleItemScreenState extends State<SingleItemScreen> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      if (_counter > 0) {
+        _counter--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +51,7 @@ class SingleItemScreen extends StatelessWidget {
                 SizedBox(height: 50),
                 Center(
                   child: Image.asset(
-                    "images/$img.png",
+                    "images/${widget.img}.png",
                     width: MediaQuery.of(context).size.width / 1.2,
                   ),
                 ),
@@ -49,7 +70,7 @@ class SingleItemScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        img,
+                        widget.img,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 30,
@@ -74,14 +95,17 @@ class SingleItemScreen extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(
-                                    CupertinoIcons.minus,
-                                    size: 18,
-                                    color: Colors.white,
+                                  InkWell(
+                                    onTap: _decrementCounter,
+                                    child: Icon(
+                                      CupertinoIcons.minus,
+                                      size: 18,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   SizedBox(width: 15),
                                   Text(
-                                    "0",
+                                    _counter.toString(),
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -89,10 +113,13 @@ class SingleItemScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(width: 15),
-                                  Icon(
-                                    CupertinoIcons.plus,
-                                    size: 18,
-                                    color: Colors.white,
+                                  InkWell(
+                                    onTap: _incrementCounter,
+                                    child: Icon(
+                                      CupertinoIcons.plus,
+                                      size: 18,
+                                      color: Colors.white,
+                                    ),
                                   )
                                 ],
                               ),
@@ -127,9 +154,54 @@ class SingleItemScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               color: Colors.white,
                             ),
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            "60 ml",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
                           )
                         ],
-                      )
+                      ),
+                      SizedBox(height: 30),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 50, 54, 56),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              child: Text(
+                                "Add to Cart",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFE57734),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              child: Icon(
+                                Icons.favorite_outline,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 )
