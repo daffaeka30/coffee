@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_akhir/screens/profile_screen.dart';
 
 class HomeBottonBar extends StatelessWidget {
   @override
@@ -34,10 +35,17 @@ class HomeBottonBar extends StatelessWidget {
             color: Colors.white,
             size: 35,
           ),
-          Icon(
-            Icons.person,
-            color: Colors.white,
-            size: 35,
+          InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => ProfileScreen(),
+              ));
+            },
+            child: Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 35,
+            ),
           ),
         ],
       ),

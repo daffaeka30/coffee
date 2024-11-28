@@ -11,10 +11,13 @@ class SingleItemScreen extends StatefulWidget {
 
 class _SingleItemScreenState extends State<SingleItemScreen> {
   int _counter = 0;
+  int _price = 10000;
+  bool _isFavorite = false;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+      _price += 10000;
     });
   }
 
@@ -22,7 +25,14 @@ class _SingleItemScreenState extends State<SingleItemScreen> {
     setState(() {
       if (_counter > 0) {
         _counter--;
+        _price -= 10000;
       }
+    });
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      _isFavorite = !_isFavorite;
     });
   }
 
@@ -125,7 +135,7 @@ class _SingleItemScreenState extends State<SingleItemScreen> {
                               ),
                             ),
                             Text(
-                              "\Rp 10.000",
+                              "\Rp $_price",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
@@ -137,7 +147,7 @@ class _SingleItemScreenState extends State<SingleItemScreen> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "Coffee is a major source of antioxidants in the diet. It has many healt benefits.",
+                        "Coffee is a major source of antioxidants in the diet. It has many health benefits.",
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.4),
                           fontSize: 16,
@@ -188,15 +198,18 @@ class _SingleItemScreenState extends State<SingleItemScreen> {
                                 ),
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: Color(0xFFE57734),
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              child: Icon(
-                                Icons.favorite_outline,
-                                color: Colors.white,
+                            InkWell(
+                              onTap: _toggleFavorite,
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFE57734),
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                child: Icon(
+                                  _isFavorite ? Icons.favorite : Icons.favorite_outline,
+                                  color: Colors.white,
+                                ),
                               ),
                             )
                           ],
@@ -213,3 +226,4 @@ class _SingleItemScreenState extends State<SingleItemScreen> {
     );
   }
 }
+
