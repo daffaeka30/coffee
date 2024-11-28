@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_akhir/screens/favorite_screen.dart';
 import 'package:project_akhir/screens/profile_screen.dart';
 
 class HomeBottonBar extends StatelessWidget {
@@ -25,10 +26,17 @@ class HomeBottonBar extends StatelessWidget {
             color: Color(0xFFE57734),
             size: 35,
           ),
-          Icon(
-            Icons.favorite_outlined,
-            color: Colors.white,
-            size: 35,
+          InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => FavoriteScreen(),
+              ));
+            },
+            child: Icon(
+              Icons.favorite_outlined,
+              color: Colors.white,
+              size: 35,
+            ),
           ),
           Icon(
             Icons.notifications,
